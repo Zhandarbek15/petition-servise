@@ -81,6 +81,7 @@ class CommentRoute(implicit
         get {
           onComplete(commentRepo.getById(commentId)) {
             case Success(comment) => complete(StatusCodes.OK, comment)
+            case Success(None) => complete(StatusCodes.BadRequest,s"Коментарий под айди $commentId не существует!")
             case Failure(ex) => complete(StatusCodes.NotFound, s"Ошибка в коде: ${ex.getMessage}")
           }
         } ~
@@ -113,7 +114,7 @@ class CommentRoute(implicit
         delete {
           onComplete(commentRepo.delete(commentId)) {
               case Success(deletedCommentId) =>
-                complete(StatusCodes.OK, s"ID удаленного коментария ${deletedCommentId.toString}")
+                complete(StatusCodes.OK, s"Число удаленных строк ${deletedCommentId.toString}")
               case Failure(ex) => complete(StatusCodes.NotFound, s"Ошибка в коде:${ex.getMessage}")
           }
         }

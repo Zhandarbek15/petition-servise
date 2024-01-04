@@ -74,6 +74,7 @@ class PetitionRoute(implicit val petitionRepo:PetitionRepository, val userRepo:U
       get {
         onComplete(petitionRepo.getById( petitionId )) {
           case Success(petition) => complete(StatusCodes.OK, petition)
+          case Success(None) => complete(StatusCodes.BadRequest,"Не правильный ID петиций!")
           case Failure(ex) => complete(StatusCodes.NotFound, s"Ошибка в коде: ${ex.getMessage}")
         }
       } ~
@@ -98,7 +99,7 @@ class PetitionRoute(implicit val petitionRepo:PetitionRepository, val userRepo:U
       delete {
         onComplete(petitionRepo.delete(petitionId)) {
           case Success(deletedPetitionId) =>
-            complete(StatusCodes.OK, s"ID удаленной петиций ${deletedPetitionId.toString}")
+            complete(StatusCodes.OK, s"Число удаленных строк ${deletedPetitionId.toString}")
           case Failure(ex) => complete(StatusCodes.NotFound, s"Ошибка в коде: ${ex.getMessage}")
         }
       }

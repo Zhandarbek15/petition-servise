@@ -1,3 +1,5 @@
 [debug] not up to date. inChanged = true, force = false
-[debug] Updating ProjectRef(uri("file:/C:/Users/Жандарбек/OneDrive/Рабочий%20стол/ООП4%20Ф/SkalaP/DB/project/"), "db-build")...
-[debug] Done updating ProjectRef(uri("file:/C:/Users/Жандарбек/OneDrive/Рабочий%20стол/ООП4%20Ф/SkalaP/DB/project/"), "db-build")
+[debug] Updating ProjectRef(uri("file:/C:/Users/Жандарбек/OneDrive/Рабочий%20стол/ООП4%20Ф/GitHub%20Projects/DB/project/"), "db-build")...
+[warn] Unrecognized repository Scala Plugin Bundled Repository, ignoring it
+[warn] Unrecognized repository Scala Plugin Bundled Repository, ignoring it
+[debug] Done updating ProjectRef(uri("file:/C:/Users/Жандарбек/OneDrive/Рабочий%20стол/ООП4%20Ф/GitHub%20Projects/DB/project/"), "db-build")

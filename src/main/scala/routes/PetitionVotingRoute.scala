@@ -126,14 +126,15 @@ extends JsonSupport {
         }
       } ~
       delete {
-        val validation = validateCustom(petitionRepo.checkOldPetitionStatus(Some(petitionVotingId))
-          -> s"Голос под айди $petitionVotingId нельзя убрать изөза статуса петиций!"
+        val validation = validateCustom(
+          petitionRepo.checkOldPetitionStatus(Some(petitionVotingId))
+          -> s"Голос под айди $petitionVotingId нельзя убрать из-за статуса петиций!"
         )
         onComplete(validation){
           case Success(true,_)=>
             onComplete(petitionVotingRepo.delete(petitionVotingId)) {
               case Success(deletedPetitionVotingId) =>
-                complete(StatusCodes.OK, s"ID удаленного голоса ${deletedPetitionVotingId.toString}")
+                complete(StatusCodes.OK, s"Число удаленных строк ${deletedPetitionVotingId.toString}")
               case Failure(ex) => complete(StatusCodes.NotFound, s"${ex.getMessage}")
             }
           case Success(false, message) => complete(StatusCodes.BadRequest, message)

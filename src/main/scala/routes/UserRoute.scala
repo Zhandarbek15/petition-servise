@@ -60,7 +60,8 @@ class UserRoute(implicit userRepo:UserRepository)
       path(IntNumber) { userId =>
         get {
           onComplete(userRepo.getById(userId)) {
-            case Success(user) => complete(StatusCodes.OK, user)
+            case Success(Some(user)) => complete(StatusCodes.OK, user)
+            case Success(None) => complete(StatusCodes.NotFound, s"Пользователя под ID $userId не существует!")
             case Failure(ex) => complete(StatusCodes.NotFound, s"Ошибка в коде: ${ex.getMessage}")
           }
         } ~
@@ -78,7 +79,7 @@ class UserRoute(implicit userRepo:UserRepository)
           delete {
             onComplete(userRepo.delete(userId)) {
               case Success(deletedUserId) =>
-                complete(StatusCodes.OK, s"ID удаленного пользователя: ${deletedUserId.toString}")
+                complete(StatusCodes.OK, s"Число удаленных строк ${deletedUserId.toString}")
               case Failure(ex) => complete(StatusCodes.NotFound, s"Ошибка в коде: ${ex.getMessage}")
             }
           }
